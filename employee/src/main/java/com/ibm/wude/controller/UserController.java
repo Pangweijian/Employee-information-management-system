@@ -1,6 +1,7 @@
 package com.ibm.wude.controller;
 
 import java.util.List;
+import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -10,8 +11,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ibm.wude.model.Msg;
 import com.ibm.wude.model.UserModel;
 import com.ibm.wude.service.UserService;
+import com.ibm.wude.utils.JwtUtils;
+import com.ibm.wude.vo.TokenVo;
 
 @CrossOrigin
 @RestController
@@ -46,17 +50,30 @@ public class UserController {
 	 * @return
 	 */
 	@PostMapping("/getUserModelByUserlogin")
-	public boolean getUserModelByUserlogin(@RequestBody UserModel user) {
-//		System.out.println(user.getUsername());
-//		System.out.println(UserService.getUserByUsername(user.getUsername()));
+	public String getUserModelByUserlogin(@RequestBody UserModel user) {
 		if (UserService.getUserByUsername(user.getUsername()) != null) {
 			if (UserService.getUserModelByUserlogin(user) != false) {
-				return true;
+				// 密码匹配，发放令牌
+				/// 随机生成字符串未userid
+				String userid = UUID.randomUUID().toString();
+				String token = JwtUtils.sign(userid);
+				// 封装令牌对象
+				TokenVo tokenVo = new TokenVo(user.getUsername(), token);
+				return new Msg(200, "登录成功,令牌已发放", tokenVo).toString();
+//				Msg reMsg = new Msg(200, "登录成功,令牌已发放", tokenVo);
+//				String res = JSON.toJSONString(reMsg, SerializerFeature.WriteMapNullValue);
+//				return res;
 			}
 		} else {
-			return false;
+//			return false;
+			return new Msg(403, "用户不存在", null).toString();
+//			String res = JSON.toJSONString(new Msg(403, "密码错误", null), SerializerFeature.WriteMapNullValue);
+//			return res;
 		}
-		return false;
+//		return false;
+		return new Msg(403, "密码错误", null).toString();
+//		String res = JSON.toJSONString(new Msg(403, "用户不存在", null), SerializerFeature.WriteMapNullValue);
+//		return res;
 	}
 
 	/**
