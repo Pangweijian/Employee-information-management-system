@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.ibm.wude.mapper.UserMapper">
+
+	<select id = "getAllUser" resultType = "com.ibm.wude.model.UserModel">
+		select * from t_user
+	</select>
+	
+	<select id = "getUserModelByUsername" resultType = "com.ibm.wude.model.UserModel">
+		SELECT * FROM t_user WHERE username = #{username}
+	</select>
+	
+	<select id = "getUserModelByUserlogin" parameterType = "com.ibm.wude.model.UserModel" resultType = "com.ibm.wude.model.UserModel">
+		SELECT * FROM t_user WHERE username = #{username} and password = #{password}
+	</select>
+	
+	<insert id="addUser" parameterType="com.ibm.wude.model.UserModel">
+	insert into t_user (id, username, realname, password, sex) 
+	values (#{id}, #{username}, #{realname}, #{password}, #{sex})
+	</insert>
+	
+	
+</mapper>

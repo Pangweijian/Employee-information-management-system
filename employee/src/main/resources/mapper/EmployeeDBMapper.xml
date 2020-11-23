@@ -1,0 +1,40 @@
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace = "com.ibm.wude.mapper.EmployeeMapper">
+
+	<insert id = "addEmploy" >
+  		insert into t_emp(id,name,salary,age) values(#{id},#{name},#{salary},#{age})
+ 	</insert>
+
+	<select id = "getAllEmployee" resultType = "com.ibm.wude.model.EmployeeModel">
+		select * from t_emp
+	</select>
+
+	
+	<select id = "getEmployeeModelById" resultType = "com.ibm.wude.model.EmployeeModel">
+		SELECT * FROM t_emp WHERE id=#{id}
+	</select>
+	
+	<select id = "getEmployeeModelByName" resultType = "com.ibm.wude.model.EmployeeModel">
+		SELECT * FROM t_emp WHERE name=#{name}
+	</select>
+	
+	<delete id = "deleteEmployeeById">
+		DELETE FROM t_emp WHERE id=#{id}
+	</delete>
+	
+	<update id = "updateEmployee">
+	UPDATE t_emp SET
+	name=#{name},
+	salary=#{salary},
+	age=#{age}
+	WHERE
+	id=#{id}
+	</update>
+	
+	<select id = "getEmpByPage" resultType = "com.ibm.wude.model.EmployeeModel">
+	select * from t_emp limit #{page},#{size}
+	</select>
+	<select id = "count" resultType = "long">
+	select count(id) from t_emp
+	</select>
+</mapper>
