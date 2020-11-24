@@ -38,8 +38,6 @@ public class UserController {
 	 */
 	@GetMapping("/getUserByUsername/{username}")
 	public UserModel getUserModelByUsername(@PathVariable("username") String username) {
-//		System.out.println("username:" + username);
-
 		return UserService.getUserByUsername(username);
 	}
 
@@ -60,20 +58,11 @@ public class UserController {
 				// 封装令牌对象
 				TokenVo tokenVo = new TokenVo(user.getUsername(), token);
 				return new Msg(200, "登录成功,令牌已发放", tokenVo).toString();
-//				Msg reMsg = new Msg(200, "登录成功,令牌已发放", tokenVo);
-//				String res = JSON.toJSONString(reMsg, SerializerFeature.WriteMapNullValue);
-//				return res;
 			}
 		} else {
-//			return false;
 			return new Msg(403, "用户不存在", null).toString();
-//			String res = JSON.toJSONString(new Msg(403, "密码错误", null), SerializerFeature.WriteMapNullValue);
-//			return res;
 		}
-//		return false;
 		return new Msg(403, "密码错误", null).toString();
-//		String res = JSON.toJSONString(new Msg(403, "用户不存在", null), SerializerFeature.WriteMapNullValue);
-//		return res;
 	}
 
 	/**

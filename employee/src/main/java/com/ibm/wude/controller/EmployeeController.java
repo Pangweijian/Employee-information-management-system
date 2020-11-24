@@ -62,7 +62,6 @@ public class EmployeeController {
 	 * @param id
 	 * @return
 	 */
-//	@GetMapping("/delEmpById/{id}")
 	@DeleteMapping("/delEmpById/{id}")
 	public boolean deleteEmployeeById(@PathVariable("id") Integer id) {
 		EmployeeModel emp = new EmployeeModel();
