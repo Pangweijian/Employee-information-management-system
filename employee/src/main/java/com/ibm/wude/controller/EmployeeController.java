@@ -99,4 +99,15 @@ public class EmployeeController {
 	public Pager<EmployeeModel> getEmpByPage(@RequestBody Pager<EmployeeModel> page) {
 		return employeeService.getEmpByPage(page);
 	}
+
+	/**
+	 * 模糊查询员工信息
+	 * 
+	 * @param string
+	 * @return
+	 */
+	@GetMapping("/findEmp/{string}")
+	public List<EmployeeModel> finEmployeeModel(@PathVariable String string) {
+		return employeeService.findEmployeeModel(string);
+	}
 }

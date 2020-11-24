@@ -55,4 +55,8 @@ public class EmployeeService {
 		pager.setTotal(employeeMapper.count());
 		return pager;
 	}
+
+	public List<EmployeeModel> findEmployeeModel(String string) {
+		return employeeMapper.findEmployeeModel(string);
+	}
 }

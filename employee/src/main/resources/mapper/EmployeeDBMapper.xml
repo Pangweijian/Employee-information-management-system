@@ -37,4 +37,8 @@
 	<select id = "count" resultType = "long">
 	select count(id) from t_emp
 	</select>
+	
+	<select id="findEmployeeModel" resultType = "com.ibm.wude.model.EmployeeModel" parameterType="String">
+	select * from t_emp where name like '%${name}%' or id like '%${id}%';
+	</select>
 </mapper>

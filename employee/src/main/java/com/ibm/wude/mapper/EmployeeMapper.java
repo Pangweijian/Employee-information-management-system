@@ -26,4 +26,6 @@ public interface EmployeeMapper {
 
 	public long count();
 
+	public List<EmployeeModel> findEmployeeModel(String string);
+
 }
