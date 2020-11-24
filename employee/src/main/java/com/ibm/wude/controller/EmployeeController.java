@@ -16,18 +16,24 @@ import com.ibm.wude.model.EmployeeModel;
 import com.ibm.wude.model.Pager;
 import com.ibm.wude.service.EmployeeService;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @CrossOrigin
 @RestController
+@Api(tags = "员工信息Controller")
 public class EmployeeController {
 
 	@Autowired
 	EmployeeService employeeService;
 
+	@ApiOperation("添加员工信息")
 	@PostMapping("/addEmploy")
 	public int addEmploy(@RequestBody EmployeeModel employee) {
 		return employeeService.addEmploy(employee);
 	}
 
+	@ApiOperation("获取所有员工信息")
 	@GetMapping("/getAllEmployee")
 	public List<EmployeeModel> getAllEmployee() {
 		List<EmployeeModel> list = employeeService.getAllEmployee();
@@ -40,6 +46,7 @@ public class EmployeeController {
 	 * @param id
 	 * @return 查询结果
 	 */
+	@ApiOperation("通过ID查询员工信息")
 	@GetMapping("/getEmpById/{id}")
 	public EmployeeModel getEmployeeModelById(@PathVariable("id") Integer id) {
 		return employeeService.getEmployeeById(id);
@@ -51,6 +58,7 @@ public class EmployeeController {
 	 * @param name
 	 * @return
 	 */
+	@ApiOperation("通过姓名查询员工信息")
 	@GetMapping("/getEmpByName/{name}")
 	public EmployeeModel getEmployeeModelByName(@PathVariable("name") String name) {
 		return employeeService.getEmployeeByName(name);
@@ -62,6 +70,7 @@ public class EmployeeController {
 	 * @param id
 	 * @return
 	 */
+	@ApiOperation("通过ID删除员工信息")
 	@DeleteMapping("/delEmpById/{id}")
 	public boolean deleteEmployeeById(@PathVariable("id") Integer id) {
 		EmployeeModel emp = new EmployeeModel();
@@ -80,6 +89,7 @@ public class EmployeeController {
 	 * @param employeeModel
 	 * @return
 	 */
+	@ApiOperation("更新员工信息")
 	@PostMapping("/updateEmp")
 	public boolean updateEmployee(@RequestBody EmployeeModel emp) {
 		if (getEmployeeModelById(emp.getId()) != null) {
@@ -95,6 +105,7 @@ public class EmployeeController {
 	 * @param page
 	 * @return
 	 */
+	@ApiOperation("分页查询员工信息")
 	@RequestMapping("/getEmpByPage")
 	public Pager<EmployeeModel> getEmpByPage(@RequestBody Pager<EmployeeModel> page) {
 		return employeeService.getEmpByPage(page);
@@ -106,6 +117,7 @@ public class EmployeeController {
 	 * @param string
 	 * @return
 	 */
+	@ApiOperation("通过ID或姓名模糊查询员工信息")
 	@GetMapping("/findEmp/{string}")
 	public List<EmployeeModel> finEmployeeModel(@PathVariable String string) {
 		return employeeService.findEmployeeModel(string);

@@ -17,13 +17,18 @@ import com.ibm.wude.service.UserService;
 import com.ibm.wude.utils.JwtUtils;
 import com.ibm.wude.vo.TokenVo;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
+
 @CrossOrigin
 @RestController
+@Api(tags = "用户信息Controller")
 public class UserController {
 
 	@Autowired
 	UserService UserService;
 
+	@ApiOperation("获取所有用户信息")
 	@GetMapping("/getAllUser")
 	public List<UserModel> getAllUser() {
 		List<UserModel> list = UserService.getAllUser();
@@ -36,6 +41,7 @@ public class UserController {
 	 * @param username
 	 * @return 查询结果
 	 */
+	@ApiOperation("通过用户名查询用户信息")
 	@GetMapping("/getUserByUsername/{username}")
 	public UserModel getUserModelByUsername(@PathVariable("username") String username) {
 		return UserService.getUserByUsername(username);
@@ -47,6 +53,7 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
+	@ApiOperation("登录")
 	@PostMapping("/getUserModelByUserlogin")
 	public String getUserModelByUserlogin(@RequestBody UserModel user) {
 		if (UserService.getUserByUsername(user.getUsername()) != null) {
@@ -71,6 +78,7 @@ public class UserController {
 	 * @param userModel
 	 * @return
 	 */
+	@ApiOperation("注册")
 	@PostMapping("/register")
 	public boolean addUser(@RequestBody UserModel userModel) {
 		if (UserService.getUserByUsername(userModel.getUsername()) == null) {
