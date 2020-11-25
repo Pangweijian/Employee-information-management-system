@@ -1,5 +1,8 @@
 package com.ibm.wude.model;
 
+import io.swagger.annotations.ApiModel;
+
+@ApiModel("用户信息Model")
 public class UserModel {
 	private Integer id;
 	private String username;
