@@ -138,6 +138,13 @@ public class EmployeeController {
 //	public void export(HttpServletRequest request, HttpServletResponse response) throws Exception {
 //		employeeService.export(request, response);
 //	}
+
+	/**
+	 * 
+	 * @param response
+	 * @throws ParseException
+	 */
+	@ApiOperation("导出员工信息表")
 	@RequestMapping(value = "/export")
 	@ResponseBody
 	public void export(HttpServletResponse response) throws ParseException {
