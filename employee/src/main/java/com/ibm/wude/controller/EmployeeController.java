@@ -134,7 +134,8 @@ public class EmployeeController {
 	 */
 	@ApiOperation("导出员工信息表")
 	@RequestMapping("/export")
-	public void export(HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Integer export(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		employeeService.export(request, response);
+		return 1;
 	}
 }
