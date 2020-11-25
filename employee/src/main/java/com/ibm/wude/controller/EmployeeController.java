@@ -2,6 +2,9 @@ package com.ibm.wude.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -9,6 +12,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.wude.model.EmployeeModel;
@@ -120,5 +124,17 @@ public class EmployeeController {
 	@GetMapping("/findEmp/{string}")
 	public List<EmployeeModel> finEmployeeModel(@PathVariable String string) {
 		return employeeService.findEmployeeModel(string);
+	}
+
+	/**
+	 * 
+	 * @param request
+	 * @param response
+	 * @throws Exception
+	 */
+	@ApiOperation("导出员工信息表")
+	@RequestMapping("/export")
+	public void export(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		employeeService.export(request, response);
 	}
 }
