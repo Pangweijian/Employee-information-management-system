@@ -78,7 +78,7 @@ public class UserController {
 	 * @param userModel
 	 * @return
 	 */
-	@ApiOperation(value = "注册", notes = "传入一个POJO（JSON格式）,其中“id”、“username”(用户名）、“password”（密码）是必须的")
+	@ApiOperation(value = "注册", notes = "传入一个POJO（JSON格式）,其中“username”(用户名）、“password”（密码）是必须的")
 	@PostMapping("/register")
 	public boolean addUser(@RequestBody UserModel userModel) {
 		if (UserService.getUserByUsername(userModel.getUsername()) == null) {
