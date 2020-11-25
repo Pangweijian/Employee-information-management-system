@@ -2,10 +2,18 @@ package com.ibm.wude.model;
 
 import java.util.List;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+
+@ApiModel
 public class Pager<T> {
-	private int page; // 分页起始页
+	@ApiModelProperty(value = "分页页数")
+	private int page; // 分页页数
+	@ApiModelProperty(value = "每页记录数")
 	private int size; // 每页记录数
+	@ApiModelProperty(value = "返回的记录集合")
 	private List<T> rows; // 返回的记录集合
+	@ApiModelProperty(value = "总记录条数")
 	private long total; // 总记录条数
 
 	public int getPage() {

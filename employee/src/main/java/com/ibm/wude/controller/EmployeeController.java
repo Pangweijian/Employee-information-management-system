@@ -9,7 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.ibm.wude.model.EmployeeModel;
@@ -27,13 +26,13 @@ public class EmployeeController {
 	@Autowired
 	EmployeeService employeeService;
 
-	@ApiOperation("添加员工信息")
+	@ApiOperation(value = "添加员工信息", notes = "传入一个POJO（JSON格式）")
 	@PostMapping("/addEmploy")
 	public int addEmploy(@RequestBody EmployeeModel employee) {
 		return employeeService.addEmploy(employee);
 	}
 
-	@ApiOperation("获取所有员工信息")
+	@ApiOperation(value = "获取所有员工信息", notes = "不必传入参数")
 	@GetMapping("/getAllEmployee")
 	public List<EmployeeModel> getAllEmployee() {
 		List<EmployeeModel> list = employeeService.getAllEmployee();
@@ -89,7 +88,7 @@ public class EmployeeController {
 	 * @param employeeModel
 	 * @return
 	 */
-	@ApiOperation("更新员工信息")
+	@ApiOperation(value = "更新员工信息", notes = "传入一个POJO（JSON格式），其中“id”是必须的")
 	@PostMapping("/updateEmp")
 	public boolean updateEmployee(@RequestBody EmployeeModel emp) {
 		if (getEmployeeModelById(emp.getId()) != null) {
@@ -105,8 +104,8 @@ public class EmployeeController {
 	 * @param page
 	 * @return
 	 */
-	@ApiOperation("分页查询员工信息")
-	@RequestMapping("/getEmpByPage")
+	@ApiOperation(value = "分页查询员工信息", notes = "传入一个POJO（JSON格式），其中“page”（页数）和“size”（每页数据量大小）是必须的")
+	@PostMapping("/getEmpByPage")
 	public Pager<EmployeeModel> getEmpByPage(@RequestBody Pager<EmployeeModel> page) {
 		return employeeService.getEmpByPage(page);
 	}

@@ -28,7 +28,7 @@ public class UserController {
 	@Autowired
 	UserService UserService;
 
-	@ApiOperation("获取所有用户信息")
+	@ApiOperation(value = "获取所有用户信息", notes = "不必传入参数")
 	@GetMapping("/getAllUser")
 	public List<UserModel> getAllUser() {
 		List<UserModel> list = UserService.getAllUser();
@@ -41,7 +41,7 @@ public class UserController {
 	 * @param username
 	 * @return 查询结果
 	 */
-	@ApiOperation("通过用户名查询用户信息")
+	@ApiOperation(value = "通过用户名查询用户信息")
 	@GetMapping("/getUserByUsername/{username}")
 	public UserModel getUserModelByUsername(@PathVariable("username") String username) {
 		return UserService.getUserByUsername(username);
@@ -53,7 +53,7 @@ public class UserController {
 	 * @param user
 	 * @return
 	 */
-	@ApiOperation("登录")
+	@ApiOperation(value = "登录", notes = "传入一个POJO（JSON格式）,其中“username”(用户名）和“password”（密码）是必须的")
 	@PostMapping("/getUserModelByUserlogin")
 	public String getUserModelByUserlogin(@RequestBody UserModel user) {
 		if (UserService.getUserByUsername(user.getUsername()) != null) {
@@ -78,7 +78,7 @@ public class UserController {
 	 * @param userModel
 	 * @return
 	 */
-	@ApiOperation("注册")
+	@ApiOperation(value = "注册", notes = "传入一个POJO（JSON格式）,其中“id”、“username”(用户名）、“password”（密码）是必须的")
 	@PostMapping("/register")
 	public boolean addUser(@RequestBody UserModel userModel) {
 		if (UserService.getUserByUsername(userModel.getUsername()) == null) {
