@@ -18,6 +18,8 @@ import com.ibm.wude.utils.JwtUtils;
 import com.ibm.wude.vo.TokenVo;
 
 import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiImplicitParams;
 import io.swagger.annotations.ApiOperation;
 
 @CrossOrigin
@@ -54,6 +56,9 @@ public class UserController {
 	 * @return
 	 */
 	@ApiOperation(value = "登录", notes = "传入一个POJO（JSON格式）,其中“username”(用户名）和“password”（密码）是必须的")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "path", required = true),
+			@ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "path", required = true) })
 	@PostMapping("/getUserModelByUserlogin")
 	public String getUserModelByUserlogin(@RequestBody UserModel user) {
 		if (UserService.getUserByUsername(user.getUsername()) != null) {
@@ -79,6 +84,9 @@ public class UserController {
 	 * @return
 	 */
 	@ApiOperation(value = "注册", notes = "传入一个POJO（JSON格式）,其中“username”(用户名）、“password”（密码）是必须的")
+	@ApiImplicitParams({
+			@ApiImplicitParam(name = "username", value = "用户名", dataType = "String", paramType = "path", required = true),
+			@ApiImplicitParam(name = "password", value = "密码", dataType = "String", paramType = "path", required = true) })
 	@PostMapping("/register")
 	public Msg addUser(@RequestBody UserModel userModel) {
 		if (UserService.getUserByUsername(userModel.getUsername()) == null) {

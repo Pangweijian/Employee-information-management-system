@@ -69,42 +69,6 @@ public class EmployeeService {
 		return employeeMapper.findEmployeeModel(string);
 	}
 
-//	public void export(HttpServletRequest request, HttpServletResponse response) {
-//		// 获取数据
-//		List<EmployeeModel> list = employeeMapper.getAllEmployee();
-//
-//		// excel标题
-//		String[] title = { "ID", "姓名", "工资", "性别" };
-//
-//		// excel文件名
-//		String fileName = "员工信息表.xls";
-//
-//		// sheet名
-//		String sheetName = "员工信息表";
-//
-//		String[][] content = new String[list.size()][title.length];
-//		for (int i = 0; i < list.size(); i++) {
-//			content[i][0] = list.get(i).getId().toString();
-//			content[i][1] = list.get(i).getName().toString();
-//			content[i][2] = list.get(i).getSalary().toString();
-//			content[i][2] = list.get(i).getAge().toString();
-//		}
-//
-//		// 创建XSSFWorkbook
-//		XSSFWorkbook wb = ExcelUtil.getXssfWorkbook(sheetName, title, content, null);
-//
-//		// 响应到客户端
-//		try {
-//			ExcelUtil.setResponseHeader(response, fileName);
-//			OutputStream os = response.getOutputStream();
-//			wb.write(os);
-//			os.flush();
-//			os.close();
-//		} catch (Exception e) {
-//			e.printStackTrace();
-//		}
-//	}
-
 	public void export(HttpServletResponse response) {
 		// 获取导出数据
 		List<EmployeeModel> list = employeeMapper.getAllEmployee();
