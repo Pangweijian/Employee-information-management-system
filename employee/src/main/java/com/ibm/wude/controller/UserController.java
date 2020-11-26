@@ -80,11 +80,12 @@ public class UserController {
 	 */
 	@ApiOperation(value = "注册", notes = "传入一个POJO（JSON格式）,其中“username”(用户名）、“password”（密码）是必须的")
 	@PostMapping("/register")
-	public boolean addUser(@RequestBody UserModel userModel) {
+	public Msg addUser(@RequestBody UserModel userModel) {
 		if (UserService.getUserByUsername(userModel.getUsername()) == null) {
-			return UserService.addUser(userModel);
+			UserService.addUser(userModel);
+			return new Msg(200, "注册成功", null);
 		} else {
-			return false;
+			return new Msg(403, "用户已存在，注册失败", null);
 		}
 	}
 }
