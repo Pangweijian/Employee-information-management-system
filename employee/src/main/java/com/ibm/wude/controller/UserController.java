@@ -64,7 +64,7 @@ public class UserController {
 		if (UserService.getUserByUsername(user.getUsername()) != null) {
 			if (UserService.getUserModelByUserlogin(user) != false) {
 				// 密码匹配，发放令牌
-				/// 随机生成字符串未userid
+				/// 随机生成字符串userid
 				String userid = UUID.randomUUID().toString();
 				String token = JwtUtils.sign(userid);
 				// 封装令牌对象
